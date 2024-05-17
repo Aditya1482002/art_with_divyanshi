@@ -1,0 +1,623 @@
+.youtube-page{
+    margin-top: 90px;
+    width: 100vw;
+    height: auto;
+}
+.row{
+    flex-direction: row;
+}
+.col{
+    flex-direction: column;
+}
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.youtube-main{
+    width: 100vw;
+    /* height: 100vh; */
+    height: auto;
+    background-color: var(--bg-dark);
+}
+.youtube-main-inner{
+    width: 90%;
+    height: 100%;
+    /* background-color: aqua; */
+    
+}
+.cards-section{
+    font-family: 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
+    width: 100%;
+    height: auto;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* grid-auto-rows: 94vh; */
+    grid-auto-rows: minmax(65vh, 65vh);
+    gap: 2vh;
+    grid-row-gap:5vh;
+    /* border-top-left-radius: 0.25rem; */
+  /* border-top-right-radius: 0.25rem; */
+  background: url("/public/images/4.jpg") no-repeat;
+    background-size: 100%;
+    background-size: cover;
+    /* padding-top: 5vh; */
+    /* padding-bottom: 5vh; */
+}
+.card-y{
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
+    /* flex-direction: column; */
+    /* box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22); */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    border-radius: 5px;
+    position: relative;
+    background-color: #fff;
+    /* box-sizing: border-box; */
+}
+.card-y:hover .card-cover-div{
+    display: flex;
+
+}
+.card-cover-div{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(168, 28, 81, 0.6);
+    background-color: rgba(250, 183, 2, 0.6);
+    /* background-color: rgba(212, 223, 84, 0.5); */
+
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    display: none;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+.card-y-img-div{
+    width: 90%;
+    height: 85%;
+    background-color: black;
+    filter: saturate(360%);
+    filter: contrast(140%);
+    position: relative;
+
+    border-radius: 8px;
+}
+.img-cover-div{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    border-radius: 8px;
+    background-color: rgba(0,0,0,0.2);
+}
+/* .img-cover-div:hover{
+    background-color: rgba(0,0,0,0.4);
+} */
+.card-y-img{
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    /* background-color: #fff; */
+}
+.card-y-title{
+    text-transform: uppercase;
+    width: 90%;
+    height: 10%;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--bg-dark);
+    text-align: center;
+    /* background-color: blueviolet; */
+    /* padding-left: 4px; */
+}
+.card-y-title span{
+    font-size: 14px;
+    font-weight: 350;
+    color: var(--text-grey);
+}
+.card-y-desc{
+    width: 90%;
+    padding: 4% 2%;
+    height: 60%;
+    font-size: 16px;
+    font-weight: 400;
+    font-weight: 350;
+    /* align-items: center; */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: aqua; */
+    /* color: var(--text-grey); */
+    color: #fff;
+    /* padding-left: 4px; */
+    /* background-color: orange; */
+}
+.card-y-category-cover{
+    width: 90%;
+    height: 15%;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-weight: 500;
+    align-items: center;
+    font-size: 20px;
+    /* background-color: red; */
+}
+.card-y-btn-date-div{
+
+    padding-left: 4px;
+    width: 100%;
+    height: 25%;
+    border-radius: 5px;
+    background-color: rgba(168, 28, 81, 0.7);
+    background-color: rgba(250, 183, 2, 0.7);
+}
+
+/* read more btn */
+.card-y-btn-date-div button {
+    position: relative;
+    display: inline-block;
+    padding: 10px 15px;
+    /* color: #03e9f4; */
+    /* color: var(--bg-dark); */
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+  
+  .card-y-btn-date-div button:hover {
+    /* background: #03e9f4; */
+    /* background: var(--bg-dark); */
+    background-color: rgb(138, 5, 56);
+    background-color: rgb(220, 161, 0);
+    background-color: var(--bg-dark);
+    color: #fff;
+    border-radius: 5px;
+    /* box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 100px #03e9f4; */
+    /* box-shadow: 0 0 2px var(--bg-dark),
+                0 0 15px var(--bg-dark),
+                0 0 25px var(--bg-dark),
+                0 0 50px var(--bg-dark); */
+  }
+  
+  .card-y-btn-date-div button span {
+    position: absolute;
+    display: block;
+  }
+  
+  .card-y-btn-date-div button span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 4px;
+    /* background: linear-gradient(90deg, transparent, #03e9f4); */
+    /* background: linear-gradient(360deg, transparent,var(--bg-dark)); */
+    /* background: linear-gradient(360deg, transparent,rgba(168, 28, 81, 1)); */
+    background: linear-gradient(360deg, transparent,#fff);
+    background: linear-gradient(360deg, transparent,var(--bg-dark));
+    animation: btn-anim1 1s linear infinite;
+  }
+  
+  @keyframes btn-anim1 {
+    0% {
+      left: -100%;
+    }
+    50%,100% {
+      left: 100%;
+    }
+  }
+  
+  .card-y-btn-date-div button span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    /* background: linear-gradient(180deg, transparent, #03e9f4); */
+    /* background: linear-gradient(360deg, transparent,var(--bg-dark)); */
+    /* background: linear-gradient(360deg, transparent,rgba(168, 28, 81, 1)); */
+    background: linear-gradient(360deg, transparent,#fff);
+    background: linear-gradient(360deg, transparent,var(--bg-dark));
+    animation: btn-anim2 1s linear infinite;
+    animation-delay: .25s
+  }
+  
+  @keyframes btn-anim2 {
+    0% {
+      top: -100%;
+    }
+    50%,100% {
+      top: 100%;
+    }
+  }
+  
+  .card-y-btn-date-div button span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 4px;
+    /* background: linear-gradient(270deg, transparent, #03e9f4); */
+    /* background: linear-gradient(360deg, transparent,var(--bg-dark)); */
+    /* background: linear-gradient(360deg, transparent,rgba(168, 28, 81, 1)); */
+    background: linear-gradient(360deg, transparent,#fff);
+    background: linear-gradient(360deg, transparent,var(--bg-dark));
+    animation: btn-anim3 1s linear infinite;
+    animation-delay: .5s
+  }
+  
+  @keyframes btn-anim3 {
+    0% {
+      right: -100%;
+    }
+    50%,100% {
+      right: 100%;
+    }
+  }
+  
+  .card-y-btn-date-div button span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    /* background: linear-gradient(360deg, transparent, #03e9f4); */
+    /* background: linear-gradient(360deg, transparent,var(--bg-dark)); */
+    /* background: linear-gradient(360deg, transparent,rgba(168, 28, 81, 1)); */
+    background: linear-gradient(360deg, transparent,#fff);
+    background: linear-gradient(360deg, transparent,var(--bg-dark));
+    animation: btn-anim4 1s linear infinite;
+    animation-delay: .75s
+  }
+  
+  @keyframes btn-anim4 {
+    0% {
+      bottom: -100%;
+    }
+    50%,100% {
+      bottom: 100%;
+    }
+  }
+
+
+/* .card1{
+  background-color: coral;
+}
+.card2{
+  background-color: rgb(145, 33, 33);
+}
+.card3{
+  background-color: rgb(23, 73, 73);
+}
+.card4{
+  background-color: rgb(80, 174, 7);
+}
+.card5{
+  background-color: rgb(0, 38, 255);
+}
+.card6{
+  background-color: rgb(255, 0, 111);
+}
+.card7{
+  background-color: rgb(80, 2, 89);
+}
+.card8{
+  background-color: rgb(187, 207, 32);
+} */
+
+@media (max-width:920px){
+    .youtube-main-inner{
+        width: 95%;
+        height: 100%;
+        /* background-color: aqua; */
+    }   
+}
+@media (max-width:780px){
+    .cards-section{
+        font-family: 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
+        width: 100%;
+        height: auto;
+        margin-top: 10vh;
+        margin-bottom: 10vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        /* grid-auto-rows: 94vh; */
+        grid-auto-rows: minmax(65vh, 65vh);
+        gap: 2vh;
+        /* border-top-left-radius: 0.25rem; */
+      /* border-top-right-radius: 0.25rem; */
+    }
+    /* .youtube-main-inner{
+        width: 95%;
+        height: 100%;
+        background-color: aqua;
+    }    */
+    .card-y-title{
+        text-transform: uppercase;
+        width: 90%;
+        height: 10%;
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--bg-dark);
+        text-align: center;
+        /* background-color: blueviolet; */
+        /* padding-left: 4px; */
+    }
+    .card-y-desc{
+        width: 90%;
+        padding: 4% 2%;
+        height: 60%;
+        font-size: 13px;
+        font-weight: 400;
+        font-weight: 350;
+        /* align-items: center; */
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* background-color: aqua; */
+        /* color: var(--text-grey); */
+        color: #fff;
+        /* padding-left: 4px; */
+    }
+    .card-y-category-cover{
+        width: 90%;
+        height: 15%;
+        text-align: center;
+        color: #fff;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        font-weight: 500;
+        align-items: center;
+        font-size: 16px;
+        /* background-color: red; */
+    }
+    .card-y-btn-date-div{
+
+        padding-left: 4px;
+        width: 100%;
+        height: 25%;
+        border-radius: 5px;
+        /* background-color: rgba(168, 28, 81, 0.6); */
+    }
+    
+}
+@media (max-width:603px){
+    .cards-section{
+        font-family: 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
+        width: 100%;
+        height: auto;
+        margin-top: 10vh;
+        margin-bottom: 10vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        /* grid-auto-rows: 94vh; */
+        grid-auto-rows: minmax(65vh, 65vh);
+        gap: 1vh;
+        /* border-top-left-radius: 0.25rem; */
+      /* border-top-right-radius: 0.25rem; */
+    }
+    /* .youtube-main-inner{
+        width: 95%;
+        height: 100%;
+        background-color: aqua;
+    }    */
+    .card-y-title{
+        text-transform: uppercase;
+        width: 90%;
+        height: 10%;
+        font-size: 15px;
+        font-weight: 400;
+        color: var(--bg-dark);
+        text-align: center;
+        /* background-color: blueviolet; */
+        /* padding-left: 4px; */
+    }
+    .card-y-desc{
+        width: 90%;
+        padding: 4% 2%;
+        height: 60%;
+        font-size: 13px;
+        font-weight: 400;
+        font-weight: 350;
+        /* align-items: center; */
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* background-color: aqua; */
+        /* color: var(--text-grey); */
+        color: #fff;
+    }
+    .card-y-btn-date-div{
+
+        padding-left: 4px;
+        width: 100%;
+        height: 25%;
+        border-radius: 5px;
+        /* background-color: rgba(168, 28, 81, 0.6); */
+    }
+    
+}
+@media (max-width:330px){
+    .cards-section{
+        font-family: 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
+        width: 100%;
+        height: auto;
+        margin-top: 10vh;
+        margin-bottom: 10vh;
+        display: grid;
+        grid-template-columns: 1fr ;
+        /* grid-auto-rows: 94vh; */
+        grid-auto-rows: minmax(50vh, auto);
+        gap: 2vh;
+        /* border-top-left-radius: 0.25rem; */
+      /* border-top-right-radius: 0.25rem; */
+    }
+    /* .youtube-main-inner{
+        width: 95%;
+        height: 100%;
+        background-color: aqua;
+    }    */
+    /* .card-y-title{
+        text-transform: uppercase;
+        width: 95%;
+        height: 8%;
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--bg-dark);
+        background-color: blueviolet;
+        padding-left: 4px;
+    } */
+    /* .card-y-desc{
+        width: 95%;
+        height: 7%;
+        font-size: 10px;
+        font-weight: 350;
+        color: var(--text-grey);
+        padding-left: 4px;
+        background-color: orange;
+    }
+    .card-y-btn-date-div{
+        padding-left: 4px;
+        width: 95%;
+        height: 15%;
+        background-color: aliceblue;
+    } */
+    /* read more btn */
+/* .card-y-btn-date-div button {
+    position: relative;
+    display: inline-block;
+    padding: 4px 10px;
+    color: #03e9f4;
+    color: var(--bg-dark);
+    font-size: 10px;
+    font-weight: 400;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    letter-spacing: 0px;
+  }
+  
+  .card-y-btn-date-div button:hover {
+    background: #03e9f4;
+    background: var(--bg-dark);
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 100px #03e9f4;
+    box-shadow: 0 0 2px var(--bg-dark),
+                0 0 15px var(--bg-dark),
+                0 0 25px var(--bg-dark),
+                0 0 50px var(--bg-dark);
+  }
+  
+  .card-y-btn-date-div button span {
+    position: absolute;
+    display: block;
+  }
+  
+  .card-y-btn-date-div button span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #03e9f4);
+    background: linear-gradient(360deg, transparent,var(--bg-dark));
+    animation: btn-anim1 1s linear infinite;
+  }
+  
+  @keyframes btn-anim1 {
+    0% {
+      left: -100%;
+    }
+    50%,100% {
+      left: 100%;
+    }
+  } */
+  
+  /* .card-y-btn-date-div button span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #03e9f4);
+    background: linear-gradient(360deg, transparent,var(--bg-dark));
+    animation: btn-anim2 1s linear infinite;
+    animation-delay: .25s
+  }
+  
+  @keyframes btn-anim2 {
+    0% {
+      top: -100%;
+    }
+    50%,100% {
+      top: 100%;
+    }
+  }
+   */
+  /* .card-y-btn-date-div button span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, #03e9f4);
+    background: linear-gradient(360deg, transparent,var(--bg-dark));
+    animation: btn-anim3 1s linear infinite;
+    animation-delay: .5s
+  }
+  
+  @keyframes btn-anim3 {
+    0% {
+      right: -100%;
+    }
+    50%,100% {
+      right: 100%;
+    }
+  }
+  
+  .card-y-btn-date-div button span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #03e9f4);
+    background: linear-gradient(360deg, transparent,var(--bg-dark));
+    animation: btn-anim4 1s linear infinite;
+    animation-delay: .75s
+  }
+  
+  @keyframes btn-anim4 {
+    0% {
+      bottom: -100%;
+    }
+    50%,100% {
+      bottom: 100%;
+    }
+  } */
+    
+}

@@ -1,0 +1,250 @@
+:root {
+  --dark-blue: #191919;
+  --dark-blue-bg: #010b35;
+  --dark-blue-accent: #b9b9b9;
+  --dark-blue-hover: hsla(0,0%,93.3%,0.0784313725490196);
+  --dark-blue-border: hsla(0,0%,100%,0.1607843137254902);
+  --dark-blue-active: rgba(129,140,239,0.2);
+  --avax-red: #e84143;
+  --arbitrum-blue: #28a0f0;
+  --border-radius-sm: 0.4rem;
+  --error-red: #fa3c58;
+  --bg-dark:#2B2B2B;
+  --light-green:#D4DF54;
+  --text-grey:#848484;
+  --arrow-bg: rgba(255, 255, 255, 0.3);
+  --arrow-icon: url("/public/images/down-arrow-svgrepo-com.svg");
+
+  /* --arrow-icon: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg); */
+  --option-bg: white;
+  --select-bg: rgba(255, 255, 255, 0.2);
+}
+*{
+  font-family: "Poppins", sans-serif;
+}
+.App {
+  margin: 0;
+  padding: 0;
+  /* background-color: #28a0f0; */
+  width: 100vw;
+  box-sizing: border-box;
+  position: relative;
+}
+.app-nav{
+  position: relative;
+  z-index: 5;
+}
+.left-fixed-div{
+  /* width: 50px; */
+  width: auto;
+  height: 150px;
+  /* background-color: #28a0f0; */
+  position: fixed;
+  top: 30vw;
+  right: 10px;
+  gap: 4px;
+}
+@media (max-width:920px){
+  .left-fixed-div{
+    right: 25px;
+  }
+}
+  
+
+.fixed-btn-div-inner{
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  /* border: 2px solid rgba(250, 183, 2, 1); */
+  /* color: rgba(250, 183, 2, 1); */
+  border-radius: 50%;
+  background: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* gap: 4px; */
+  font-size: 22px;
+  cursor: pointer;
+}
+.fixed-btn-div-inner:hover{
+  color: #fff;
+  /* background-color: #fff; */
+  border: 2px solid #fff;
+}
+.fixed-up-btn-div{
+  /* background-color: red; */
+  background-color: rgb(25, 105, 225);
+  color: #fff;
+  border: 2px solid #fff;
+ 
+}
+.fixed-whatsapp-btn-div{
+  background-color: green;
+  color: #fff;
+  border: 2px solid #fff;
+  /* font-size: 16px; */
+  /* display: flex; */
+
+}
+.fixed-whatsapp-btn-div a{
+  /* color: rgba(250, 183, 2, 1); */
+  color: #fff;
+  display: inline;
+}
+/* .fixed-down-btn-div{
+  background-color: green;
+} */
+.color{
+  background-color: #C9FF8F;
+  background-color: #197B22;
+  background-color: #0F3789;
+  background-color: #fff;
+  background-color: #fff;
+  background-color: #FF5733;
+  background-color: #fff;
+  /* headerBgColor: '#197B22',
+  headerFontSize: '20px',
+  botBubbleColor: '#0F3789',
+  headerFontColor: 'white',
+  botFontColor: 'white',
+  userBubbleColor: '#FF5733',
+  userFontColor: 'white', */
+}
+/*
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+
+.titillium-web-extralight {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.titillium-web-light {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.titillium-web-regular {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.titillium-web-semibold {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.titillium-web-bold {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.titillium-web-black {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.titillium-web-extralight-italic {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.titillium-web-light-italic {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.titillium-web-regular-italic {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.titillium-web-semibold-italic {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.titillium-web-bold-italic {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 75px;
+}
+
+body {
+  font-weight: 400;
+  overflow-x: hidden;
+  position: relative;
+  /* background-color: #121212 !important; */
+  color: #fff !important;
+  font-family: "Centra", sans-serif !important;
+}
+
+button {
+  border: 0;
+  background-color: transparent;
+}
+
+
+/* .overlay{
+  width: 100vw;
+  height: 100vh;
+  background-color: #28a0f0;
+  position:fixed;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom:0;
+  z-index: 9999999;
+} */
+
+
+
