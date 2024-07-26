@@ -40,6 +40,7 @@
   height: 150px;
   /* background-color: #28a0f0; */
   position: fixed;
+  z-index:200;
   top: 30vw;
   right: 10px;
   gap: 4px;
