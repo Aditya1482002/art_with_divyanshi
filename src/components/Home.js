@@ -1,10 +1,125 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import LoaderWrapper from './LoaderWrapper';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import "./Home.css"
 import NewBanner from "./NewBanner"
 import { FaRegHeart } from "react-icons/fa6";
 import {NavLink} from 'react-router-dom'
 function Home() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [gender, setGender] = useState('');
+  const [about, setAbout] = useState('');
+  const [contactNumber, setContactNumber] = useState('');
+  const [dateofBirth, setDateofBirth] = useState('');
+  const [userProfile, setUserProfile] = useState('');
+
+
+
+  const [title, setTitle] = useState('');
+  // const [artistShowcase, setArtistShowcase] = useState([]);
+  const [videoUrl, setVideoUrl] = useState('');
+  const [loading,setLoading]=useState(false);
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorValue, setErrorValue] = useState('');
+
+  useEffect(() => {
+
+    const fetchUserData = async () => {
+      try {
+        const baseUrl = process.env.REACT_APP_BASE_URL;
+        setLoading(true);
+        // const response = await axios.get(`http://localhost:4000/api/v1//getArtById/${id}`);
+        const response = await axios.get(`${baseUrl}/userProfile`);
+        // console.log("response",response);
+        // setArt(response.data.artData);
+        setFirstName(response.data.userData.firstName);
+        setLastName(response.data.userData.lastName);
+        // setPrevArtUrl(response.data.artData.image);
+        // // setPrevCategory(response.data.artData.category);
+        setGender(response.data.userData.gender);
+        setAbout(response.data.userData.about);
+        setContactNumber(response.data.userData.contactNumber);
+        function formatDate(mongoDBDate) {
+            const date = new Date(mongoDBDate);
+            
+            // Ensure the date is valid
+            if (isNaN(date.getTime())) {
+              throw new Error('Invalid Date');
+            }
+          
+            // Define arrays for days and months
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+          
+            // Extract day, date, and month
+            const day = days[date.getUTCDay()];
+            const dayDate = date.getUTCDate();
+            const month = months[date.getUTCMonth()];
+            const year = date.getUTCFullYear();
+          
+            // Format the output
+            return `${day}, ${dayDate} ${month} ${year}`;
+          }
+        
+        // setCreatedAt(response.data.artData.createdAt);
+        setDateofBirth(formatDate(response.data.userData.dateOfBirth));
+        // setDateofBirth(new Date(response.data.userData.dateofBirth).toISOString().split('T')[0]);
+        setUserProfile(response.data.userData.userProfile);
+       
+        setLoading(false);
+      } catch (error) {
+        setError(true);
+        setError('server Error !');
+        setOpen(true);
+        setLoading(false);
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+
+    const fetchArtworks = async () => {
+      try {
+        setLoading(true);
+        
+        const baseUrl = process.env.REACT_APP_BASE_URL;
+     
+        const response = await axios.get(`${baseUrl}/getRecentShowcase`); // Replace with your backend API endpoint
+     
+        // console.log(response.data.allArtistShowcaseData)
+        setTitle(response.data.allArtistShowcaseData[0].title);
+        setVideoUrl(response.data.allArtistShowcaseData[0].videoUrl);
+        setLoading(false)
+      } catch (error) {
+        setError(true);
+        setError('server Error !');
+        setOpen(true);
+        setLoading(false);
+        console.error('Error fetching artworks:', error);
+        
+        // setLoading(true); // Set loading to false on error
+      }
+    };
+    // console.log("Data",Data)
+    
+    fetchArtworks();
+    fetchUserData();
+    // const menuItems = [...new Set(Data.map((Val) => Val.category))];
+  }, []);
+  
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
+    <LoaderWrapper open={loading}>
+    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity={error ? "error" : "success"} sx={{ width: '100%' }}>
+          {error ? errorValue : "Success!"}
+        </Alert>
+      </Snackbar>
     <div className='home'>
         <NewBanner/>
         <div className='sketch-section'>
@@ -108,7 +223,10 @@ function Home() {
           <div className='artist-showcase-section-inner'>
             <div className='artist-showcase-text-div'>Artist Showcase</div>
             <div className='intro-video-div'>
-               <iframe className='intro-video' src="https://www.youtube.com/embed/qzN7UY4D8VQ?si=nmGecWvTBYkY5nA3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen='true' webkitallowfullscreen mozallowfullscreen></iframe>
+               <iframe className='intro-video' 
+              //  src="https://www.youtube.com/embed/qzN7UY4D8VQ?si=nmGecWvTBYkY5nA3"
+                src={videoUrl}
+                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen='true' webkitallowfullscreen mozallowfullscreen></iframe>
             </div>
           </div>
         </div>
@@ -131,12 +249,18 @@ function Home() {
                 {/* </div> */}
               </div>
               <div className='home-about-div2'>
-                <div className='artist-img'></div>
+                <div className='artist-img'>
+                  <img className='artist-user-image'
+                  //  src='https://res.cloudinary.com/dmx77pyrs/image/upload/v1720344707/art-with-divyanshi/m86mapwhf10mvpyglnrb.png' 
+                   src={userProfile} 
+                   alt='image'/>
+                </div>
               </div>
             </div>
           </div>
         </div>
     </div>
+    </LoaderWrapper>
     // <div className='home-main'>
     //   <div className='home-inner'>
     //     <div className='watercolor-div'>

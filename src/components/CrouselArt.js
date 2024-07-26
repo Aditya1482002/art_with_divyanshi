@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import "./CrouselArt.css";
+import { useParams, useNavigate } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
-import {NavLink} from 'react-router-dom'
-import Data from "./Data.js";
+import {NavLink} from 'react-router-dom';
+import axios from 'axios';
+// import Data from "./Data.js";
 import 'react-multi-carousel/lib/styles.css';
 // import { useState } from 'react';
 // import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
@@ -22,27 +24,49 @@ import 'react-multi-carousel/lib/styles.css';
 // import { EffectCoverflow,Pagination,Navigation,A11y,Scrollbar } from 'swiper/modules';
 // import
 
-function CrouselArt(props) {
-    console.log("hello");
-    console.log(props.handleArtDataApp);
-    // const [crouselItem, setCrouselItem] = useState(Data);
-    // const [categoryItem, setCategoryItem] = useState("");
-    // setCategoryItem(props.artData.category);
-    const newCrouselItem = Data.filter((newVal) => {
-        return newVal.category === props.artData.category; 
-              // comparing category for displaying data
-      });
+function CrouselArt({artCategory}) {
+    console.log("hello",artCategory);
+    const [data,setData]=useState([]);
+
+    
+    const [newCrouselItem, setNewCrouselItem] = useState([]);
+
+    const navigate = useNavigate(); // Initialize useNavigate
+  
+    useEffect(() => {
+      const fetchArtworks = async () => {
+        try {
+          const baseUrl = process.env.REACT_APP_BASE_URL;
+          const response = await axios.get(`${baseUrl}/getAllArtItems`);
+          setData(response.data.allArtItems);
+        } catch (error) {
+          console.error('Error fetching artworks:', error);
+        }
+      };
+      fetchArtworks();
+    }, []);
+  
+    useEffect(() => {
+      if (data.length > 0) {
+        const filteredItems = data.filter((item) => item.category === artCategory);
+        setNewCrouselItem(filteredItems);
+      }
+    }, [data, artCategory]);
+    const handleView = (id) => {
+      navigate(`/art/${id}`); // Navigate to the view page with the art ID
+    };
+
     //   setCrouselItem(newCrouselItem);
     //   console.log(newCrouselItem);
-    function handleCrouselArtClick(e,x) {
-        console.log("gahh");
-        console.log(x);
-        // setArtDataChild(x);
-        // console.log(x.LargeDesc);
-        // console.log(artDataChild);
-        props.handleArtDataApp(x);
+    // function handleCrouselArtClick(e,x) {
+    //     console.log("gahh");
+    //     console.log(x);
+    //     // setArtDataChild(x);
+    //     // console.log(x.LargeDesc);
+    //     // console.log(artDataChild);
+    //     props.handleArtDataApp(x);
     
-      }
+    //   }
 
 
 
@@ -76,25 +100,28 @@ function CrouselArt(props) {
                             <div className='crousel-slide'>
                                                         <div className='card2 card-y flex col'>
                                                     <div className='card-y-img-div flex row'>
-                                                        <img src={val.img} className='card-y-img' alt={val.title} />
+                                                        <img src={val.artImage} className='card-y-img' alt={val.title} />
                                                         <div className='img-cover-div'></div>
                                                     </div>
                                                     <div className='card-cover-div flex col'>
-                                                        <p className='card-y-desc'>{val.desc}</p>
+                                                        <p className='card-y-desc'>{val.smallDesc}</p>
                                                         <p className='card-y-category-cover'>{val.category}</p>
                                                     <div className='card-y-btn-date-div flex row'>
-                                                       <NavLink to="/art">
-                                                        <button onClick={(e) => handleCrouselArtClick(e, val)}>
+                                                       {/* <NavLink to="/art"> */}
+                                                        <button 
+                                                        // onClick={(e) => handleCrouselArtClick(e, val)}
+                                                        onClick={() => handleView(val._id)}
+                                                        >
                                                         <span></span>
                                                         <span></span>
                                                         <span></span>
                                                         <span></span>
                                                         Read More
                                                         </button>
-                                                        </NavLink>
+                                                        {/* </NavLink> */}
                                                     </div>
                                                     </div>
-                                                    <h2 className='card-y-title'>{val.title} <span>{val.DateModified}</span></h2>
+                                                    <h2 className='card-y-title'>{val.title} <span>{val.createdAt}</span></h2>
                                                     {/* <p className='card-y-desc'>lorem ipsum</p>
                                                     <div className='card-y-btn-date-div'>
                                                         <button >

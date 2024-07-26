@@ -43,6 +43,7 @@
   top: 30vw;
   right: 10px;
   gap: 4px;
+  z-index: 4;
 }
 @media (max-width:920px){
   .left-fixed-div{
@@ -247,4 +248,12 @@ button {
 } */
 
 
-
+body a {
+  text-decoration: none !important; /* Removes the underline */
+  color: inherit; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: default; /* Removes the pointer cursor */
+}

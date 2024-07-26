@@ -1043,6 +1043,16 @@ height: 100%;
   transition: all 0.4s ease;
 }
 }
+@media (max-width:360px){
+  .contact-form input,.contact-form textarea{
+    padding-left: 18px !important;
+  }
+}
+@media (max-width:360px){
+.info-div-text{
+  font-size: 14px !important;
+}
+}
 @media (max-width:283px){
   .get-in-touch-div h2{
     width: 80vw;

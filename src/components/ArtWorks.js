@@ -1,34 +1,95 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import {NavLink} from 'react-router-dom'
-import Data from "./Data.js";
-import { useState } from 'react';
+// import Data from "./Data.js";
+import { useState, useEffect } from 'react';
+import LoaderWrapper from './LoaderWrapper';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import "./ArtWorks.css"
+import axios from 'axios';
+import "./Youtube.css"
 // import { FaSearch } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
+
 function ArtWorks({handleArtDataApp}) {
-  const [artDataChild, setArtDataChild] = useState({});
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorValue, setErrorValue] = useState('');
+  const [artworks, setArtworks] = useState([]);
+  const [loading, setLoading] = useState(false); // Loading state for async fetch
+  const [Data,setData]=useState([]);
   const [item, setItem] = useState(Data);
   const [selectValue, setSelectValue] = React.useState("All");
   const [sortValue,setSortValue]=useState("Recent");
   const [searchValue,setSearchValue]=useState("");
+  const [artDataChild, setArtDataChild] = useState({});
+  const [menuItems, setMenuItems] = useState([]);
+  
+  const navigate = useNavigate(); // Initialize useNavigate
 
-  // console.log(Data.LargeDesc);
+  useEffect(() => {
+    const fetchArtworks = async () => {
+      try {
+        setLoading(true);
+      const baseUrl = process.env.REACT_APP_BASE_URL;
+      // `${baseUrl}
+        const response = await axios.get(`${baseUrl}/getAllArtItems`); // Replace with your backend API endpoint
+        // console.log(response)
+        setArtworks(response.data.allArtItems); // Assuming the response data is an array of artworks
+        console.log(response.data.allArtItems)
+        // console.log()
+        setData(response.data.allArtItems);
+        setLoading(false); // Set loading to false after data is fetched
+        const menuItems = [...new Set(Data.map((Val) => Val.category))];
+        setMenuItems(menuItems);
+        setItem(response.data.allArtItems);
+        console.log("first, artworks",artworks);
+        console.log("first",Data)
+        setLoading(false);
+      } catch (error) {
+        setError(true);
+        setErrorValue("server Error !");
+        setOpen(true);
+        setLoading(false);
+        console.error('Error fetching artworks:', error);
+        // Handle error, e.g., set an error state or show an error message
+        setLoading(false); // Set loading to false on error
+      }
+    };
+    // console.log("Data",Data)
+    
+    fetchArtworks();
+    // const menuItems = [...new Set(Data.map((Val) => Val.category))];
+  }, []); // Empty dependency array to run effect only once on component mount
 
-  // spread operator will display all the values from our category section of our data while Set will only allow the single value of each kind to be displayed
+  useEffect(() => {
+    setItem(Data);
+    const menuItems = [...new Set(Data.map((Val) => Val.category))];
+    setMenuItems(menuItems);
+    console.log("second, artworks",artworks);
+    console.log("second",Data)
+    // console.log("menuItems ", menuItems);
+  }, [Data]);
+  // const menuItems = [...new Set(Data.map((Val) => Val.category))];
+  // console.log("menuItems ",menuItems)
+// console.log(handleArtDataApp);
+//   function handleClickArt(e,x) {
+//     console.log("gahh");
+//     console.log(x);
+//     setArtDataChild(x);
+//     console.log(x.LargeDesc);
+//     console.log(artDataChild);
+//     handleArtDataApp(x);
 
-  const menuItems = [...new Set(Data.map((Val) => Val.category))];
-console.log(handleArtDataApp);
-  function handleClickArt(e,x) {
-    console.log("gahh");
-    console.log(x);
-    setArtDataChild(x);
-    console.log(x.LargeDesc);
-    console.log(artDataChild);
-    handleArtDataApp(x);
+//   }
 
-  }
-
-
+  const handleEdit = (id) => {
+    navigate(`/editart/${id}`); // Navigate to the edit page with the art ID
+  };
+  const handleView = (id) => {
+    navigate(`/art/${id}`); // Navigate to the view page with the art ID
+  };
 
   const filterItem = (curcat) => {
     console.log(curcat);
@@ -39,22 +100,12 @@ console.log(handleArtDataApp);
       console.log("if");
       setItem(Data);
       if(sortValue==="Recent"){
-        // console.log("recent");
-        // let sorted = Data.sort(function(a, b) {
-        //   // return new Date(b.DateModified) - new Date(a.DateModified);
-        //   return b.DateModified.valueOf() - a.DateModified.valueOf()
-        // });
-        // setItem(sorted);
+        
          const sortedData = Data.slice().sort((a, b) => new Date(b.DateModified) - new Date(a.DateModified));
          setItem(sortedData);
          console.log("recent");
       }
       else{
-        // let sorted = Data.sort(function(a, b) {
-        //  // return new Date(a.DateModified) - new Date(b.DateModified);
-        //  return a.DateModified.valueOf() - b.DateModified.valueOf()
-        // });
-        // setItem(sorted);
         const sortedData = Data.slice().sort((a, b) => new Date(a.DateModified) - new Date(b.DateModified));
          setItem(sortedData);
         
@@ -69,29 +120,16 @@ console.log(handleArtDataApp);
     });
     if(sortValue==="Recent"){
       console.log("recent");
-      // let sorted = newItem.sort(function(a, b) {
-      //   // return new Date(b.DateModified) - new Date(a.DateModified);
-      //   return b.DateModified.valueOf() - a.DateModified.valueOf()
-      // });
-      // setItem(sorted);
       const sortedData = newItem.slice().sort((a, b) => new Date(b.DateModified) - new Date(a.DateModified));
          setItem(sortedData);
         console.log("recent");
     }
     else{
-      // let sorted = newItem.sort(function(a, b) {
-      //   // return new Date(a.DateModified) - new Date(b.DateModified);
-      //   return a.DateModified.valueOf() - b.DateModified.valueOf()
-      // });
-      // setItem(sorted);
       const sortedData = newItem.slice().sort((a, b) => new Date(a.DateModified) - new Date(b.DateModified));
       setItem(sortedData);
       console.log("Old")
     }
-    // let sorted = newItem.sort(function(a, b) {
-    //   return new Date(b.DateModified) - new Date(a.DateModified);
-    // });
-    // setItem(sorted);
+    
   };
   
   const onChangefn = (event) => {
@@ -105,30 +143,6 @@ console.log(handleArtDataApp);
   const sortFn = (event) => {
     const value = event.target.value;
     setSortValue(value);
-    // setSelectValue(value);
-    // filterItem(value);
-    // console.log(value);
-    // console.log(selectValue);
-    // if(value==="Recent"){
-    //   console.log("recent");
-    //   let sorted = item.sort(function(a, b) {
-    //     return new Date(b.DateModified) - new Date(a.DateModified);
-    //   });
-    //   // console.log(sorted);
-    //   setItem(sorted);
-    //   // console.log(item);
-    //   return;
-    // }
-    // else{
-    //   console.log("old");
-    //   let sorted = item.sort(function(a, b) {
-    //     return new Date(a.DateModified) - new Date(b.DateModified);
-    //   });
-    //   // console.log(sorted);
-    //   setItem(sorted);
-    //   // console.log(item);
-    //   return;
-    // }
 
   };
   const searchFilter=(searchTerm)=>{
@@ -151,30 +165,48 @@ console.log(handleArtDataApp);
   }
   const onSearch=(event)=>{
     const value = event.target.value;
-    // console.log(value);
+    console.log("value", value);
     setSearchValue(value);
     searchFilter(searchValue);
   }
-  // console.log(searchValue);
-  // console.log(sortValue);
-  //  console.log(item);
-  // filterItem(selectValue);
-  // console.log(selectValue);
-  // const clearInput = () => {
-  //   console.log("sjsks");
-  //   const input = document.getElementsByTagName("input")[0];
-  //   console.log("input ",input);
-  //   input.value = "";
+
+  // if (loading) {
+  //   return <div><Spinner/></div>; // Optional: Show a loading indicator while fetching data
   // }
+  function formatDate(mongoDBDate) {
+    const date = new Date(mongoDBDate);
+    
+    // Ensure the date is valid
+    if (isNaN(date.getTime())) {
+      throw new Error('Invalid Date');
+    }
   
-  // const clearBtn = document.getElementsByClassName("clear-btn");
-  // if(clearBtn){
-  //   console.log("hey");
-  //   clearBtn.addEventListener("click", clearInput);
-  // }
+    // Define arrays for days and months
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   
+    // Extract day, date, and month
+    const day = days[date.getUTCDay()];
+    const dayDate = date.getUTCDate();
+    const month = months[date.getUTCMonth()];
+    const year = date.getUTCFullYear();
+  
+    // Format the output
+    return `${day}, ${dayDate} ${month} ${year}`;
+  }
+
+  
+  const handleClose = () => {
+    setOpen(false);
+  };
   
   return (
+    <LoaderWrapper open={loading}>
+    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity={error ? "error" : "success"} sx={{ width: '100%' }}>
+          {error ? errorValue : "Success!"}
+        </Alert>
+      </Snackbar>
     <div className='artwork-page'>
     
       <div className='artwork-main1'>
@@ -241,25 +273,28 @@ console.log(handleArtDataApp);
               return (
                 <div className='card2 card-y flex col' key={val.id}>
                   <div className='card-y-img-div flex row'>
-                    <img src={val.img} className='card-y-img' alt="NFT" />
+                    <img src={val.artImage} className='card-y-img' alt="artImage" />
                     <div className='img-cover-div'></div>
                   </div>
                   <div className='card-cover-div flex col'>
-                    <p className='card-y-desc'>{val.desc}</p>
+                    <p className='card-y-desc'>{val.smallDesc}</p>
                     <p className='card-y-category-cover'>{val.category}</p>
                   <div className='card-y-btn-date-div flex row'>
-                    <NavLink to="/art">
-                    <button onClick={(e) => handleClickArt(e, val)}>
+                    {/* <NavLink to="/art"> */}
+                    <button 
+                    onClick={() => handleView(val._id)}
+                    // onClick={(e) => handleClickArt(e, val)}
+                    >
                       <span></span>
                       <span></span>
                       <span></span> 
                       <span></span>
                       Read More
                     </button>
-                    </NavLink>
+                    {/* </NavLink> */}
                   </div>
                   </div>
-                  <h2 className='card-y-title'>{val.title} <span>({val.DateModified})</span></h2>
+                  <h2 className='card-y-title'>{val.title} <span>({formatDate(val.createdAt)})</span></h2>
                   {/* <p className='card-y-desc'>lorem ipsum</p>
                   <div className='card-y-btn-date-div'>
                     <button >
@@ -323,6 +358,7 @@ console.log(handleArtDataApp);
           </div>
       </div>
     </div>
+    </LoaderWrapper>
   )
 }
 

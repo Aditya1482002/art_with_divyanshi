@@ -2,7 +2,8 @@
 import './App.css';
 import { Route,Link,Routes } from 'react-router-dom';
 
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
 import Navbar from "./components/Navbar" 
 import Home from "./components/Home" 
 import ArtWorks from "./components/ArtWorks" 
@@ -18,6 +19,7 @@ import { FaArrowUp } from "react-icons/fa";
 
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
+import axios from 'axios';
 
 
 const steps = [
@@ -129,6 +131,47 @@ const config = {
 // import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   const [artDataApp, setArtDataApp] = useState({});
+  const [address, setAddress] = useState('');
+  const [gmail, setGmail] = useState('');
+  const [whatsapp, setWhatsapp] = useState('');
+  const [facebook, setFacebook] = useState('');
+  const [instagram, setInstagram] = useState('');
+  const [youtube, setYoutube] = useState('');
+  const [linkedin, setLinkedin] = useState('');
+  
+
+  
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+  // `${baseUrl}
+  useEffect(() => {
+    
+
+    const fetchSocialData = async () => {
+      try {
+        // const response = await axios.get(`http://localhost:4000/api/v1//getArtById/${id}`);
+        const response = await axios.get(`${baseUrl}/getSocial`);
+        // console.log("response",response);
+        
+        setWhatsapp(response.data.socialLinkData.whatsapp);
+        setInstagram(response.data.socialLinkData.instagram);
+        setFacebook(response.data.socialLinkData.facebook);
+        setLinkedin(response.data.socialLinkData.linkedin);
+        setGmail(response.data.socialLinkData.gmail);
+        setYoutube(response.data.socialLinkData.youtube);
+        setAddress(response.data.socialLinkData.address);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    
+
+    fetchSocialData();
+
+    
+
+  }, []);
+  
   function handleArtDataApp(y){
     console.log(y);
     setArtDataApp(y);
@@ -165,7 +208,10 @@ function App() {
       </div>
       <div className='left-fixed-div flex col'>
           <div className='fixed-up-btn-div fixed-btn-div-inner' onClick={goToBtn}><FaArrowUp/></div>
-          <div className='fixed-whatsapp-btn-div fixed-btn-div-inner'><a href='https://wa.me/9140757060'><FaWhatsapp/></a></div>
+          <div className='fixed-whatsapp-btn-div fixed-btn-div-inner'><a 
+            // href='https://wa.me/9140757060'
+            href={`https://wa.me/${whatsapp}`}
+          ><FaWhatsapp/></a></div>
           {/* <div className='fixed-down-btn-div fixed-btn-div-inner'></div> */}
       </div>
       <div className='app-nav'><Navbar/></div>
@@ -178,7 +224,7 @@ function App() {
           <Route path="/youtube" element={<Youtube/>}/>
           <Route path="/about" element={<About/>}/>
           <Route path="/contact" element={<Contact/>}/>
-          <Route path="/art" element={<Art artData={artDataApp} handleArtDataApp={handleArtDataApp}/>}/>
+          <Route path="/art/:id" element={<Art/>}/>
           <Route path="/crousel" element={<CrouselArt handleArtDataApp={handleArtDataApp}/>}/>
         </Routes>  
       </div>
