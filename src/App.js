@@ -20,6 +20,7 @@ import { FaArrowUp } from "react-icons/fa";
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
 import axios from 'axios';
+import AnnouncementBar from './components/AnnouncementBar';
 
 
 const steps = [
@@ -214,7 +215,9 @@ function App() {
           ><FaWhatsapp/></a></div>
           {/* <div className='fixed-down-btn-div fixed-btn-div-inner'></div> */}
       </div>
+      
       <div className='app-nav'><Navbar/></div>
+      <AnnouncementBar/>
       <div>
         <Routes>
           <Route path="/" element={<Home/>}/>

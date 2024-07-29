@@ -1,0 +1,70 @@
+.announcement-component {
+    text-align: center;
+  }
+  
+  .announcement-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: #ffeb3b; */
+    background-color: rgba(250, 183, 2, 1);
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    /* top: 0; */
+    width: 100%;
+    color: black;
+    z-index: 1000;
+  }
+  
+  .announcement-icon {
+    margin-right: 10px;
+  }
+  
+  .announcement-text-container {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .announcement-text {
+    display: inline-block;
+    animation: scroll 10s linear infinite;
+  }
+  
+  .download-button {
+    font-size: 12px !important;
+    margin: 0 10px;
+    color: black !important;
+    text-transform: capitalize !important;
+  }
+  
+  .close-icon {
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .announcement-bar {
+      flex-direction: row;
+      text-align: center;
+    }
+  
+    .announcement-icon, .close-icon {
+      margin-bottom: 5px;
+    }
+  
+    .announcement-text-container {
+      margin-bottom: 5px;
+    }
+  }
+  
